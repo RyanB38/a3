@@ -1,3 +1,6 @@
 1. I used the standard c version of finding system time becuase it seemed easier and it was the first method i found on google
 2. i used <sstream> lib so that i could create a ostringstream and use iomanip and return a string
 3. I didnt use the chrono function because i didnt really understand it and using modular arithematic seemed much easier.
+4. The way i implemented backwards compatibility was just to keep the standard receipt obbject and only create it when it was being used
+i then could use the this keyword to set the raw ptr for receiptstrategy to the address for that object.
+This to me struck me as the easiest method as i didnt have to worry about moving ownership and changing the code significantly. This is an easy implementation of RAII as the standardreceipt object only is created when its needed and is destroyed as all other members are with the default deconstructor of parking meter. This keeps ownership within the class and does not require the significant change in code that smart pointers would.

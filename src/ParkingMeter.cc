@@ -13,7 +13,7 @@ using namespace std;
 ParkingMeter::ParkingMeter(ICalculateTime* strategy)
     : amountInCents(0), costStrategy(strategy), defaultReceipt() 
     {
-        // using this keyword in order to set receipt strategy to the created defaultreceipt object
+        // using this keyword in order to set receipt strategy to point at the StandardReceipt defaultreceipt
         this->receiptStrategy = &this->defaultReceipt;
     }
 
@@ -39,5 +39,6 @@ int ParkingMeter::getAmount() {
 string ParkingMeter::printTicket() {
     if (!costStrategy) return "Error: No cost strategy set.";
     int minutes = costStrategy->calculateTime(amountInCents);
+    // maintains simple polymorphism and raw PTRs instead of control flow
     return receiptStrategy->printReceipt(minutes);
 }
